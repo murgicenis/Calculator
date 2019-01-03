@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonMultiply = (Button) findViewById(R.id.buttonMultiply);
         Button buttonMinus = (Button) findViewById(R.id.buttonMinus);
         Button buttonPlus = (Button) findViewById(R.id.buttonPlus);
+        Button buttonNegative = (Button) findViewById(R.id.buttonNegative);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -106,6 +107,29 @@ public class MainActivity extends AppCompatActivity {
         };
 
         btnMessage.setOnClickListener(msgListener);
+
+        View.OnClickListener negListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = newNumber.getText().toString();
+                Log.d(TAG, "VALUE IS " + value);
+                if(value.equals("")) {
+                    newNumber.setText("-");
+                } else {
+                    if(!value.contains("-")) {
+                        Log.d(TAG, "HERE");
+                        String negValue = "-" + value;
+                        newNumber.setText(negValue);
+                    } else {
+                        String newValue = value.replace("-", "");
+                        Log.d(TAG, "HERE VALUE IS " + newValue);
+                        newNumber.setText(newValue);
+                    }
+                }
+            }
+        };
+
+        buttonNegative.setOnClickListener(negListener);
     }
 
 
