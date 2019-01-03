@@ -108,28 +108,24 @@ public class MainActivity extends AppCompatActivity {
 
         btnMessage.setOnClickListener(msgListener);
 
-        View.OnClickListener negListener = new View.OnClickListener() {
+        buttonNegative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String value = newNumber.getText().toString();
                 Log.d(TAG, "VALUE IS " + value);
-                if(value.equals("")) {
+                if(value.length() == 0) {
                     newNumber.setText("-");
                 } else {
-                    if(!value.contains("-")) {
-                        Log.d(TAG, "HERE");
-                        String negValue = "-" + value;
-                        newNumber.setText(negValue);
-                    } else {
-                        String newValue = value.replace("-", "");
-                        Log.d(TAG, "HERE VALUE IS " + newValue);
-                        newNumber.setText(newValue);
+                    try {
+                        Double doubleValue = Double.valueOf(value);
+                        doubleValue *= -1;
+                        newNumber.setText(doubleValue.toString());
+                    } catch (NumberFormatException e) {
+                        newNumber.setText("");
                     }
                 }
             }
-        };
-
-        buttonNegative.setOnClickListener(negListener);
+        });
     }
 
 
